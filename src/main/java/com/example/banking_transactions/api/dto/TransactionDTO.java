@@ -1,4 +1,4 @@
-package com.example.banking_transactions.dto;
+package com.example.banking_transactions.api.dto;
 
 public class TransactionDTO {
 

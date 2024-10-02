@@ -1,20 +1,22 @@
 package com.example.banking_transactions.api.controller;
 
-import com.example.banking_transactions.dto.TransactionDTO;
-import com.example.banking_transactions.dto.AccountDTO;
+import com.example.banking_transactions.api.dto.TransactionDTO;
+import com.example.banking_transactions.api.dto.AccountDTO;
 import com.example.banking_transactions.api.model.Transaction;
 import com.example.banking_transactions.api.model.Account;
-import com.example.banking_transactions.service.AccountService;
+import com.example.banking_transactions.api.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.Map;
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;
+    @Autowired
 
     public AccountController(AccountService accountService){
         this.accountService = accountService;
@@ -25,7 +27,21 @@ public class AccountController {
         Account account = accountService.createAccount(accountDTO);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
-    @PostMapping("/{id/transfer")
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable Long id) throws Exception {
+        System.out.println("Received request for account ID: " + id);
+        Account account = accountService.findAccountById(id);
+        if (account != null) {
+            System.out.println("Account found: " + account);
+            return new ResponseEntity<>(account, HttpStatus.OK);
+        } else {
+            System.out.println("Account not found for ID: " + id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{id}/transfer")
     public ResponseEntity<String> transferFunds(@PathVariable Long id, @RequestBody TransactionDTO transactionDTO){
         try {
             accountService.transferFunds(id, transactionDTO);
@@ -36,7 +52,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}/transactions")
-    public ResponseEntity<List<Transaction>> getTransactionHistory(@PathVariable Long id) {
+    public ResponseEntity<List<Transaction>> getTransactionHistory(@PathVariable Long id) throws Exception {
         List <Transaction> transactions = accountService.getTransactionHistory(id);
         if (transactions != null){
             return new ResponseEntity<>(transactions, HttpStatus.OK);
@@ -45,5 +61,25 @@ public class AccountController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+        System.out.println("Attempting to delete account with ID: " + id);
+        try {
+            accountService.deleteAccount(id);
+            System.out.println("Account deleted successfully.");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            System.out.println("Error deleting account: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping
+    public ResponseEntity<Map<Long, Account>> getAllAccounts() {
+        Map<Long, Account> accounts = accountService.getAllAccounts();
+        if (accounts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
 
 }

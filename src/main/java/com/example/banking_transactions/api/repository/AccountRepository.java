@@ -1,6 +1,5 @@
-package com.example.banking_transactions.repository;
+package com.example.banking_transactions.api.repository;
 
-import com.example.banking_transactions.api.controller.AccountController;
 import com.example.banking_transactions.api.model.Account;
 import org.springframework.stereotype.Repository;
 
