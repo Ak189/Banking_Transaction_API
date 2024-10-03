@@ -11,8 +11,6 @@ public class AccountDTO {
     @Min(value = 0, message = "Initial balance must be positive")
     private double initialBalance;
 
-    public AccountDTO() {}
-
     public AccountDTO(String name, double initialBalance){
         this.name = name;
         this.initialBalance = initialBalance;

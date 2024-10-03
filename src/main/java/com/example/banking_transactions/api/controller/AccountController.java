@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
 
 import java.util.List;
 import java.util.Map;
@@ -23,12 +25,12 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody AccountDTO accountDTO){
+    public ResponseEntity<Account> createAccount(@Valid @RequestBody AccountDTO accountDTO){
         Account account = accountService.createAccount(accountDTO);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/accounts/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
         try {
             System.out.println("Received request for account ID: " + id);
@@ -49,7 +51,7 @@ public class AccountController {
 
 
     @PostMapping("/{id}/transfer")
-    public ResponseEntity<String> transferFunds(@PathVariable Long id, @RequestBody TransactionDTO transactionDTO){
+    public ResponseEntity<String> transferFunds(@PathVariable Long id, @Valid @RequestBody TransactionDTO transactionDTO){
         try {
             accountService.transferFunds(id, transactionDTO);
             return new ResponseEntity<>("Transfer successful", HttpStatus.OK);
@@ -68,7 +70,7 @@ public class AccountController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/accounts/{id}")
     public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
         System.out.println("Attempting to delete account with ID: " + id);
         try {
