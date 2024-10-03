@@ -29,17 +29,24 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> getAccountById(@PathVariable Long id) throws Exception {
-        System.out.println("Received request for account ID: " + id);
-        Account account = accountService.findAccountById(id);
-        if (account != null) {
-            System.out.println("Account found: " + account);
-            return new ResponseEntity<>(account, HttpStatus.OK);
-        } else {
-            System.out.println("Account not found for ID: " + id);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
+        try {
+            System.out.println("Received request for account ID: " + id);
+            Account account = accountService.findAccountById(id);
+            if (account != null) {
+                System.out.println("Account found: " + account);
+                return new ResponseEntity<>(account, HttpStatus.OK);
+            } else {
+                System.out.println("Account not found for ID: " + id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            System.out.println("Error retrieving account: " + e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PostMapping("/{id}/transfer")
     public ResponseEntity<String> transferFunds(@PathVariable Long id, @RequestBody TransactionDTO transactionDTO){
