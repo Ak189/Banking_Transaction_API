@@ -9,8 +9,17 @@ import java.util.Map;
 @Repository
 
 public class AccountRepository {
+    // Map that store account information with the account ID as the key.
     private Map<Long, Account> accountMap = new HashMap<>();
+    //Generates unique id for the accounts.
     private Long accountIdCounter = 1L;
+
+    /**
+     * Saves a new account to repository and assigns a new id.
+     *
+     * @param account The account object to be saved.
+     * @return The saved account with assigned id.
+     */
 
     public Account save(Account account){
         account.setId(accountIdCounter++);
@@ -18,21 +27,54 @@ public class AccountRepository {
         return account;
     }
 
+    /**
+     * Finds an account by its id.
+     *
+     * @param accountId The id of the account to be retrieved.
+     * @return The account object if found, or null if no account with the specified id exists.
+     */
+
     public Account findById(Long accountId){
         return accountMap.get(accountId);
     }
+
+    /**
+     * Checks whether an account with a given id exists in the repository.
+     *
+     * @param accountId The id of the account to check.
+     * @return True if the account exists, otherwise false.
+     */
 
     public boolean existsById(Long accountId){
         return accountMap.containsKey(accountId);
     }
 
+    /**
+     * Retrieve all accounts from the repository.
+     *
+     * @return A map containing all accounts, keyed by their account IDs.
+     */
+
     public Map<Long, Account> findAll(){
         return accountMap;
     }
 
+    /**
+     * Updates the existing account in the repository.
+     * If the account does not exist,it will overwrite the data of the provided account.
+     *
+     * @param account The account object containing updated information.
+     */
+
     public void update(Account account){
         accountMap.put(account.getId(), account);
     }
+
+    /**
+     * Deletes an account from the repository by its id.
+     *
+     * @param accountId The id of the account to be deleted.
+     */
 
     public void delete(Long accountId){
         accountMap.remove(accountId);
