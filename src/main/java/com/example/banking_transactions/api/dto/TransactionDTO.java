@@ -6,8 +6,6 @@ public class TransactionDTO {
 
     private double amount;
 
-    public TransactionDTO() {}
-
     public TransactionDTO(Long toAccountId, double amount){
         this.toAccountId = toAccountId;
         this.amount = amount;
@@ -17,15 +15,8 @@ public class TransactionDTO {
         return toAccountId;
     }
 
-    public void setToAccountId(Long toAccountId){
-        this.toAccountId = toAccountId;
-    }
-
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount){
-        this.amount = amount;
-    }
 }

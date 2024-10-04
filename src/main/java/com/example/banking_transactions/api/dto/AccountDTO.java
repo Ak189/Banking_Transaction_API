@@ -20,15 +20,8 @@ public class AccountDTO {
         return name;
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
     public double getInitialBalance() {
         return initialBalance;
     }
 
-    public void setInitialBalance(double initialBalance){
-        this.initialBalance = initialBalance;
-    }
 }
