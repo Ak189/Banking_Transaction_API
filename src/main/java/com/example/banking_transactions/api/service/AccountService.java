@@ -22,7 +22,10 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public Account createAccount(AccountDTO accountDTO) {
+    public Account createAccount(AccountDTO accountDTO) throws IllegalArgumentException {
+        if (accountDTO.getInitialBalance() < 0){
+            throw new IllegalArgumentException("Initial balance cannot be negative.");
+        }
         Account account = new Account(null, accountDTO.getName(), accountDTO.getInitialBalance());
         return accountRepository.save(account);
     }
