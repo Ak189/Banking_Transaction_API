@@ -9,7 +9,6 @@ public class AccountDTO {
     @NotNull(message = "Name cannot be null")
     private String name;
     //Initial Balance can't be negative.
-    @Min(value = 0, message = "Initial balance must be positive")
     private double initialBalance;
 
     //Constructor class to initiate name and balane.
