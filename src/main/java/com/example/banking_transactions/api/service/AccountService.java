@@ -37,11 +37,17 @@ public class AccountService {
      * @return A new Account.
      * @throws IllegalArgumentException If the initial balance is negative.
      */
-    public Account createAccount(AccountDTO accountDTO) throws IllegalArgumentException {
-        if (accountDTO.getInitialBalance() < 0){
-            throw new IllegalArgumentException("Initial balance cannot be negative.");
+    public Account createAccount(AccountDTO accountDTO) {
+        // Check if the SIN number or driving license already exists
+        if (accountRepository.existsBySinNumberOrDrivingLicense(accountDTO.getSinNumber(), accountDTO.getDrivingLicense())) {
+            throw new IllegalArgumentException("Account with this SIN number or driving license already exists.");
         }
-        Account account = new Account(null, accountDTO.getName(), accountDTO.getInitialBalance());
+
+        Account account = new Account(null, accountDTO.getFirstName(), accountDTO.getMiddleName(), accountDTO.getLastName(),
+                accountDTO.getAddressLine1(), accountDTO.getAddressLine2(), accountDTO.getCity(), accountDTO.getState(),
+                accountDTO.getPostalCode(), accountDTO.getDrivingLicense(), accountDTO.getSinNumber(),
+                accountDTO.getInitialBalance());
+
         return accountRepository.save(account);
     }
 

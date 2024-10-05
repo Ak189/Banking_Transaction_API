@@ -2,6 +2,7 @@ package com.example.banking_transactions.api.repository;
 
 import com.example.banking_transactions.api.model.Account;
 import org.springframework.stereotype.Repository;
+import java.util.concurrent.atomic.AtomicLong;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,8 @@ public class AccountRepository {
     // Map that store account information with the account ID as the key.
     private Map<Long, Account> accountMap = new HashMap<>();
     //Generates unique id for the accounts.
-    private Long accountIdCounter = 1L;
+    //private Long accountIdCounter = 1L;
+    private AtomicLong accountIdCounter = new AtomicLong(1L);
 
     /**
      * Saves a new account to repository and assigns a new id.
@@ -21,8 +23,12 @@ public class AccountRepository {
      * @return The saved account with assigned id.
      */
 
-    public Account save(Account account){
-        account.setId(accountIdCounter++);
+    public Account save(Account account) {
+        if (existsBySinNumberOrDrivingLicense(account.getSinNumber(), account.getDrivingLicense())) {
+            // Duplicate found, do not save
+            return null;
+        }
+        account.setId(accountIdCounter.getAndIncrement());
         accountMap.put(account.getId(), account);
         return account;
     }
@@ -78,6 +84,39 @@ public class AccountRepository {
 
     public void delete(Long accountId){
         accountMap.remove(accountId);
+    }
+
+    public Account findBySinNumber(String sinNumber) {
+        return accountMap.values().stream()
+                .filter(account -> account.getSinNumber().equals(sinNumber))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Finds an account by its driving license.
+     *
+     * @param drivingLicense The driving license of the account to be retrieved.
+     * @return The account object if found, or null if no account with the specified driving license exists.
+     */
+    public Account findByDrivingLicense(String drivingLicense) {
+        return accountMap.values().stream()
+                .filter(account -> account.getDrivingLicense().equals(drivingLicense))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Checks whether an account with a given SIN number or driving license exists in the repository.
+     *
+     * @param sinNumber      The SIN number of the account to check.
+     * @param drivingLicense The driving license of the account to check.
+     * @return True if the account exists, otherwise false.
+     */
+    public boolean existsBySinNumberOrDrivingLicense(String sinNumber, String drivingLicense) {
+        return accountMap.values().stream()
+                .anyMatch(account -> account.getSinNumber().equals(sinNumber) ||
+                        account.getDrivingLicense().equals(drivingLicense));
     }
 
 }
