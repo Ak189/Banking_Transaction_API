@@ -13,12 +13,25 @@ public class Customer {
     //Defining driving license number.
     private Long DlNo;
     //Constructor class for customer.
-    public Customer(String firstName, String middleName, String lastName, Long SinNo, Long DlNo){
+    private String AddressLine1;
+    private String AddressLine2;
+    private String City;
+    private String State;
+    private String postalCode;
+    private String Country;
+    public Customer(String firstName, String middleName, String lastName, Long SinNo, Long DlNo, String AddressLine1, String AddressLine2,
+                    String City, String State, String postalCode, String Country){
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.SinNo = SinNo;
         this.DlNo = DlNo;
+        this.AddressLine1 = AddressLine1;
+        this.AddressLine2 = AddressLine2;
+        this.City = City;
+        this.State = State;
+        this.postalCode = postalCode;
+        this.Country = Country;
     }
     //Getter method for first name.
     public String getFirstName() {
@@ -60,4 +73,52 @@ public class Customer {
     public void setDlNo(Long dlNo) {
         DlNo = dlNo;
     }
+
+    public String getAddressLine1() {
+        return AddressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        AddressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return AddressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        AddressLine2 = addressLine2;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+    public void setCountry(String country) {
+        Country = country;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
 }
