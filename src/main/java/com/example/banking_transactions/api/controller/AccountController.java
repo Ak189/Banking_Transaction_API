@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 
 
 import java.util.List;
-import java.util.Map;
 //Spring REST controller, enables the class to handle HTTP requests.
 @RestController
 //API's defined in the class will have a common base URL /accounts.
@@ -33,10 +32,23 @@ public class AccountController {
      * @return ResponseEntity with the created Account(name, balancce and id) and HTTP status CREATED.
      */
     @PostMapping
-    public ResponseEntity<Account> createAccount(@Valid @RequestBody AccountDTO accountDTO){
-        Account account = accountService.createAccount(accountDTO);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
+    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountDTO accountDTO) {
+        try {
+            Account account = accountService.createAccount(accountDTO);
+            return new ResponseEntity<>(account, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            // Log the error message (optional)
+            System.out.println("Error creating account: " + e.getMessage());
+            // Return BAD_REQUEST with the error message
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            // Catch any other unexpected exceptions
+            System.out.println("Unexpected error: " + e.getMessage());
+            return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+
     /**
      * GET account details by account ID.
      *
