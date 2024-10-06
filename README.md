@@ -56,6 +56,7 @@ Make sure you have the following installed on your machine:
     ```bash
    curl -X DELETE http://localhost:8080/api/accounts/12345
 ### Assumptions
+- The Curl commands follow a general syntax /accounts/{id}, to get info, transaction history or delete an account just replace the id.
 - User input for initial balance is always and integer without spaces.
 - There is a single currency and a single account of a user.
 - Postal code must have more than 5 characters and less than 10 chars.
