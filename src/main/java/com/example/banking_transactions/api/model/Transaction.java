@@ -3,7 +3,7 @@ package com.example.banking_transactions.api.model;
 import java.time.LocalDateTime;
 
 public class Transaction {
-    //Id for the transaction
+    //id for the transaction
     private Long transactionId;
     //Sender's account id.
     private Long fromAccountId;
@@ -14,7 +14,7 @@ public class Transaction {
     //Time at which the transaction occurred.
     private LocalDateTime timestamp;
     /**
-    Constructor class which represents financial transactions between two accounts,
+     Constructor class which represents financial transactions between two accounts,
      It contains information about transaction id, sender's account id, receiver's account id and
      the amount to be transferred.
      */

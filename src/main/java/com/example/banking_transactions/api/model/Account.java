@@ -21,13 +21,15 @@ public class Account {
 
     // Identification details
     private String drivingLicense;
-    private String sinNumber;  // Social Insurance Number
+    //Social insurance number
+    private String sinNumber;
+
 
     // Account-specific information
     private double balance;
     private List<Transaction> transactions;
 
-    // Constructor class for all fields
+    // Constructor class for all parameters.
     public Account(Long id, String firstName, String middleName, String lastName, String addressLine1,
                    String addressLine2, String city, String state, String postalCode, String drivingLicense,
                    String sinNumber, double balance) {
@@ -152,12 +154,12 @@ public class Account {
         this.transactions.add(transaction);
     }
 
-    // Method to update the balance (positive for deposits, negative for withdrawals)
+    // Method to update the balance positive for deposits and negative for withdrawals.
     public void updateBalance(double amount) {
         this.balance += amount;
     }
 
-    // Override equals() and hashCode() methods to handle duplicates based on driving license and SIN number
+    // Override equals() and hashCode() methods to handle duplicates based on ID's.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
