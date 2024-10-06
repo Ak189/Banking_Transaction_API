@@ -28,7 +28,7 @@ Make sure you have the following installed on your machine:
    git clone https://github.com/Ak189/Banking_Transaction_API
 2. **Navigate to project directory**
     ```bash
-    cd Bank_Transaction_API
+    cd Banking_Transaction_API
 3. **Build the project**
     ```bash
    mvn clean instal
