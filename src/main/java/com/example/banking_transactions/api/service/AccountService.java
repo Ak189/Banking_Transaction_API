@@ -20,7 +20,7 @@ import java.util.Map;
 public class AccountService {
 
     private final AccountRepository accountRepository;
-    private Long transactionIdCounter = 1L;  // For auto-generating transaction IDs
+    private Long transactionIdCounter = 1L;
     /**
      * Constructor class to initialize AccountService with the AccountRepository dependency.
      * @param accountRepository The repository that handles account data persistence.

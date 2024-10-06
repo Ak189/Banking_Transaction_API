@@ -25,7 +25,7 @@ public class AccountRepository {
 
     public Account save(Account account) {
         if (existsBySinNumberOrDrivingLicense(account.getSinNumber(), account.getDrivingLicense())) {
-            // Duplicate found, do not save
+            // Duplicate found, do not save.
             return null;
         }
         account.setId(accountIdCounter.getAndIncrement());
@@ -109,7 +109,7 @@ public class AccountRepository {
     /**
      * Checks whether an account with a given SIN number or driving license exists in the repository.
      *
-     * @param sinNumber      The SIN number of the account to check.
+     * @param sinNumber The SIN number of the account to check.
      * @param drivingLicense The driving license of the account to check.
      * @return True if the account exists, otherwise false.
      */
