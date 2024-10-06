@@ -43,17 +43,17 @@ Make sure you have the following installed on your machine:
    curl -X POST "http://localhost:8080/accounts" \
    -H "Content-Type: application/json" \
    -d '{
-   "firstName": "Akash",
-   "middleName": "",
-   "lastName": "Gupta",
-   "addressLine1": "89 tru",
-   "addressLine2": "",
-   "city": "Brampton",
-   "state": "Ontario",
-   "postalCode": "L7A 444",
-   "drivingLicense": "A1234567",
-   "sinNumber": "123456789",
-   "initialBalance": 1000.0
+      "firstName": "Akash",
+      "middleName": "",
+      "lastName": "Gupta",
+      "addressLine1": "89 tru",
+      "addressLine2": "",
+      "city": "Brampton",
+      "state": "Ontario",
+      "postalCode": "L7A 444",
+      "drivingLicense": "A1234567",
+      "sinNumber": "123456789",
+      "initialBalance": 1000.0
    }'
 
 2. **Retrieving information of an account**
