@@ -40,9 +40,7 @@ Make sure you have the following installed on your machine:
 
 1. **Creating an Account**
     ```bash
-   curl -X POST "http://localhost:8080/accounts"\-H "Content-Type: application/json"\-d '{"firstName": "John","middleName": "D",
-    "lastName": "Doe","addressLine1": "123 Main St","addressLine2": "Apt 4B","city": "Saskatoon","state": "Saskatchewan",
-   "postalCode": "S7K 1N2","drivingLicense": "A1234567","sinNumber": "123456789","initialBalance": 5000.0}'
+   curl -X POST "http://localhost:8080/accounts"\-H "Content-Type: application/json"\-d '{"firstName": "John","middleName": "D","lastName": "Doe","addressLine1": "123 Main St","addressLine2": "Apt 4B","city": "Saskatoon","state": "Saskatchewan","postalCode": "S7K 1N2","drivingLicense": "A1234567","sinNumber": "123456789","initialBalance": 5000.0}'
 2. **Retrieving information of an account**
     ```bash
    curl -X GET http://localhost:8080/accounts/1
