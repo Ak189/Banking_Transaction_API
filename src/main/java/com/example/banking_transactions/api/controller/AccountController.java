@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 //Spring REST controller, enables the class to handle HTTP requests.
 @RestController
+
 //API's defined in the class will have a common base URL /accounts.
 @RequestMapping("/accounts")
 public class AccountController {
@@ -30,7 +31,7 @@ public class AccountController {
      * Create a new account.
      *
      * @param accountDTO A DTO object containing the following details; name, initial balance.
-     * @return ResponseEntity with the created Account(name, balancce and id) and HTTP status CREATED.
+     * @return ResponseEntity with the created Account(name, balance and id) and HTTP status CREATED.
      */
     @PostMapping
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountDTO accountDTO) {
@@ -38,29 +39,28 @@ public class AccountController {
             Account account = accountService.createAccount(accountDTO);
             return new ResponseEntity<>(account, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            // Log the error message (optional)
-            System.out.println("Error creating account: " + e.getMessage());
-            // Return BAD_REQUEST with the error message
+            // Log the error message .
+            System.out.println("Error creating an account: " + e.getMessage());
+            // Return BAD_REQUEST with the error message.
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            // Catch any other unexpected exceptions
+            // Catch any other unexpected exceptions.
             System.out.println("Unexpected error: " + e.getMessage());
             return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
     /**
      * GET account details by account ID.
      *
-     * @param id Account ID to search for.
+     * @param id Account id to search for.
      * @return ResponseEntity with the found Account including details name balance transaction history and HTTP status OK if found,
      * or NOT_FOUND if the account does not exist.
      */
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
         try {
-            System.out.println("Received request for account ID: " + id);
+            System.out.println("Received request for an account ID: " + id);
             Account account = accountService.findAccountById(id);
             if (account != null) {
                 System.out.println("Account found: " + account);
@@ -93,6 +93,7 @@ public class AccountController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
     /**
      * GET the transaction history for a specific account by ID.
      *
