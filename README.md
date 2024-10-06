@@ -43,10 +43,10 @@ Make sure you have the following installed on your machine:
    curl -X POST "http://localhost:8080/accounts" \
    -H "Content-Type: application/json" \
    -d '{
-   "firstName": "Akasj",
+   "firstName": "Akash",
    "middleName": "",
    "lastName": "Gupta",
-   "addressLine1": 89 tru",
+   "addressLine1": "89 tru",
    "addressLine2": "",
    "city": "Brampton",
    "state": "Ontario",
